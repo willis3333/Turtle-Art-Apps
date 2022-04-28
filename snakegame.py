@@ -39,6 +39,7 @@ while game_on:
         restart = screen.textinput('Game OVER', 'continue? (y or n)')
         if restart == 'y':
             # resetting snake, food, and screen if user chooses to continue
+            # TODO: debug snake movement on restart of game
             screen.clear()
             snake.__init__()
             snake.snake_create()

@@ -99,6 +99,9 @@ class SnakeFood:
 
 
 class ScoreBoard(turtle.Turtle):
+    '''
+    Default object for game scoreboard with parent class Turtle. 
+    '''
     def __init__(self):
         super().__init__()
         self.score = 0
