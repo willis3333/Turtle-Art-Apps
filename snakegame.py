@@ -28,13 +28,13 @@ while game_on:
     time.sleep(.1)
     snake.move()
     # set snake food to relocate upon collision with snake
-    if int(snake.segments[0].distance(snake_food.food)) < 10:
+    if int(snake.segments[0].distance(snake_food.food)) < 20:
         scoreboard.update_score()
         snake_food.place_food()
         snake.add_segment()
         time.sleep(.1)
     # set game to pause and prompt user to continue upon snake collision with screen borders
-    if snake.segments[0].position()[0] > 298 or snake.segments[0].position()[0] < -298 or snake.segments[0].position()[1] > 298 or snake.segments[0].position()[1] < -298:
+    if int(snake.segments[0].position()[0]) not in range(-295, 295) or int(snake.segments[0].position()[1]) not in range(-295, 295):
         game_on = False
         restart = screen.textinput('Game OVER', 'continue? (y or n)')
         if restart == 'y':
