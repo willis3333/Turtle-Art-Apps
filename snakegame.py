@@ -11,6 +11,8 @@ screen.title('Snake Game')
 snake.snake_create()
 snake_food = snake_module.SnakeFood()
 snake_food.place_food()
+scoreboard = snake_module.ScoreBoard()
+scoreboard.show_score()
 
 # Begin game
 game_on = True
@@ -27,6 +29,7 @@ while game_on:
     snake.move()
     # set snake food to relocate upon collision with snake
     if int(snake.segments[0].distance(snake_food.food)) < 10:
+        scoreboard.update_score()
         snake_food.place_food()
         snake.add_segment()
         time.sleep(.1)
@@ -41,6 +44,8 @@ while game_on:
             snake.snake_create()
             snake_food.__init__()
             snake_food.place_food()
+            scoreboard.__init__()
+            scoreboard.show_score()
             game_on = True
         else:
             exit()

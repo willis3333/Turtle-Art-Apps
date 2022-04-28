@@ -97,3 +97,26 @@ class SnakeFood:
         places food in random position on the screen
         '''
         self.food.setposition(random.randint(-200, 200), random.randint(-200, 200))
+
+class ScoreBoard:
+    def __init__(self):
+        self.score = 0
+        self.scoreboard = turtle.Turtle()
+        self.scoreboard.shapesize(0.1, .1)
+        self.scoreboard.penup()
+        self.scoreboard.goto(0, 250)
+
+    def show_score(self):
+        '''
+        Writes string to object scoreboard displaying current score stored as score variable
+        '''
+        self.scoreboard.write(arg=f'Score: {self.score}', align='center', font=('Arial', 15, 'normal'))
+
+    def update_score(self):
+        '''
+        Adds 1 to score variable and clears then shows current score
+        '''
+        self.score += 1
+        self.scoreboard.clear()
+        self.show_score()
+
