@@ -26,7 +26,7 @@ while game_on:
     time.sleep(.1)
     snake.move()
     # set snake food to relocate upon collision with snake
-    if int(snake.segments[0].position()[1] - snake_food.food.position()[1]) in range(-10, 10) and int(snake.segments[0].position()[0] - snake_food.food.position()[0]) in range(-20, 20):
+    if int(snake.segments[0].distance(snake_food.food)) < 10:
         snake_food.place_food()
         snake.add_segment()
         time.sleep(.1)
