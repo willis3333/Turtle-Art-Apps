@@ -57,7 +57,7 @@ class Snake:
 
 class SnakeFood:
     def __init__(self):
-        self.food = turtle.Turtle(shape='turtle')
+        self.food = turtle.Turtle(shape='circle')
         self.food.shapesize(1, 1)
         self.food.penup()
 
