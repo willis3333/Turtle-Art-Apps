@@ -4,10 +4,8 @@ import snake_module
 
 # set up initial variables for snake, food, and screen
 snake = snake_module.Snake()
-screen = turtle.Screen()
-screen.screensize(1000, 1000)
-screen.tracer(0)
-screen.title('Snake Game')
+screen_init = snake_module.Screen()
+screen = screen_init.screen
 snake.snake_create()
 snake_food = snake_module.SnakeFood()
 snake_food.place_food()
@@ -33,23 +31,28 @@ while game_on:
         snake_food.place_food()
         snake.add_segment()
         time.sleep(.1)
-    # set game to pause and prompt user to continue upon snake collision with screen borders
+    # set game to pause and scoreboard to write game over snake collision with screen borders
     if int(snake.segments[0].position()[0]) not in range(-295, 295) or int(snake.segments[0].position()[1]) not in range(-295, 295):
         game_on = False
-        restart = screen.textinput('Game OVER', 'continue? (y or n)')
-        if restart == 'y':
-            # resetting snake, food, and screen if user chooses to continue
-            # TODO: debug snake movement on restart of game
-            screen.clear()
-            snake.__init__()
-            snake.snake_create()
-            snake_food.__init__()
-            snake_food.place_food()
-            scoreboard.__init__()
-            scoreboard.show_score()
-            game_on = True
-        else:
-            exit()
-
+        scoreboard.game_over()
+        # restart = screen.textinput('Game OVER', 'continue? (y or n)')
+        # if restart == 'y':
+        #     # resetting snake, food, and screen if user chooses to continue
+        #     # TODO: debug snake movement on restart of game
+        #     screen.clear()
+        #     snake.__init__()
+        #     snake.snake_create()
+        #     snake_food.__init__()
+        #     snake_food.place_food()
+        #     scoreboard.__init__()
+        #     scoreboard.show_score()
+        #     game_on = True
+        # else:
+        #     exit()
+    # set game to pause and scoreboard to write game over snake collision with its tail
+    for segment in snake.segments[1:]:
+        if segment.distance(snake.segments[0]) < 5:
+            game_on = False
+            scoreboard.game_over()
 screen.exitonclick()
 
