@@ -13,6 +13,6 @@ for _ in range(0, int(360/gap)):
     turtle_drawer.pencolor(color)
     turtle_drawer.circle(100)
 
-screen.exitonclck()
+screen.exitonclick()
 
 

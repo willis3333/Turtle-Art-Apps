@@ -4,8 +4,7 @@ import snake_module
 
 # set up initial variables for snake, food, and screen
 snake = snake_module.Snake()
-screen_init = snake_module.Screen()
-screen = screen_init.screen
+screen = snake_module.ScreenInit()
 snake.snake_create()
 snake_food = snake_module.SnakeFood()
 snake_food.place_food()
