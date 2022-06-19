@@ -1,3 +1,4 @@
+import time
 import turtle
 import random
 
@@ -5,6 +6,7 @@ import random
 """
 Snake Module is created to create object oriented code for the snakegame.
 """
+
 
 class Screen:
     def __init__(self):
@@ -94,6 +96,12 @@ class Snake:
         if self.segments[0].heading() != 0:
             self.segments[0].setheading(180)
 
+    def reset(self):
+        for seg in self.segments:
+            seg.goto(2000, 2000)
+        self.__init__()
+        self.snake_create()
+
 
 class SnakeFood:
     """
@@ -117,30 +125,56 @@ class ScoreBoard(turtle.Turtle):
     Default object for game scoreboard with parent class Turtle.
     """
 
-    def __init__(self):
+    def __init__(self, highest_score, user):
         super().__init__()
         self.score = 0
+        self.hi_score = highest_score
+        self.user = user
         self.color('white')
         self.hideturtle()
         self.penup()
-        self.goto(0, 250)
+        self.start_logo = '''
+
+          _________ _______      _____   ____  __.___________  
+         /   _____/ \      \    /  _  \ |    |/ _|\_   _____/  
+         \_____  \  /   |   \  /  /_\  \|      <   |    __)_   
+         /        \/    |    \/    |    \    |  \  |        \  
+        /_______  /\____|__  /\____|__  /____|__ \/_______  /  
+                \/         \/         \/        \/        \/   
+
+                '''
 
     def show_score(self):
         '''
         Writes string to object scoreboard displaying current score stored as score variable
         '''
-        self.write(arg=f'Score: {self.score}', align='center', font=('Arial', 15, 'normal'))
+        self.goto(0, 250)
+        self.write(arg=f'Score: {self.score} High Score: {self.hi_score}', align='center', font=('Arial', 15, 'normal'))
 
     def update_score(self):
         '''
         Adds 1 to score variable and clears then shows current score
         '''
         self.score += 1
+        if self.score > self.hi_score:
+            self.hi_score = self.score
         self.clear()
         self.show_score()
 
     def game_over(self):
         self.goto(0, 0)
-        self.write('GAME OVER.', align='center', font=('Arial', 15, 'normal'))
+        self.write(f'GAME OVER. final score: {self.score}', align='center', font=('Arial', 15, 'normal'))
+
+    def reset(self):
+        self.clear()
+        self.score = 0
+        self.show_score()
+
+    def intro(self, high_scores):
+        self.goto(0, 0)
+        self.write(arg=f'Hello, {self.user}. Welcome to \n{self.start_logo}\nHigh Scores: \n{high_scores}',
+                   align='center', font=('Arial', 15, 'normal'))
+        time.sleep(4)
+        self.clear()
 
 
